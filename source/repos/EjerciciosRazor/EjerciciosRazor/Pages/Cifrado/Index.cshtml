@@ -1,0 +1,50 @@
+﻿@page
+@model EjerciciosRazor.Pages.Cifrado.IndexModel
+@{
+    ViewData["Title"] = "Cifrado César";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4"> Cifrado César</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Mensaje</label>
+                            <textarea asp-for="Mensaje" class="form-control"
+                                      rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Desplazamiento (n)</label>
+                            <input asp-for="N" class="form-control"
+                                   type="number" min="1" max="24" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Operación</label>
+                            <select asp-for="Operacion" class="form-select">
+                                <option value="cifrar">Cifrar</option>
+                                <option value="descifrar">Descifrar</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100">
+                            Procesar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Resultado))
+            {
+                <div class="card mt-3 shadow border-warning">
+                    <div class="card-body text-center">
+                        <h5>Resultado:</h5>
+                        <p class="fs-4 fw-bold text-warning">@Model.Resultado</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

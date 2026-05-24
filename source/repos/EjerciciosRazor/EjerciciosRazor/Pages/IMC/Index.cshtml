@@ -1,0 +1,47 @@
+﻿@page
+@model EjerciciosRazor.Pages.IMC.IndexModel
+@{
+    ViewData["Title"] = "Calculadora IMC";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">🏋️ Calculadora de Índice de Masa Corporal</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Peso (kg)</label>
+                            <input asp-for="Peso" class="form-control"
+                                   type="number" step="0.1" min="1" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Altura (metros, ej: 1.75)</label>
+                            <input asp-for="Altura" class="form-control"
+                                   type="number" step="0.01" min="0.5" max="3" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            Calcular IMC
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.IMC.HasValue)
+        {
+            <div class="col-md-5">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <img src="@Model.ImagenUrl" alt="estado" class="mb-3" />
+                        <h3>IMC: @Model.IMC.Value.ToString("F2")</h3>
+                        <h4 class="text-primary">@Model.Clasificacion</h4>
+                        <p class="text-muted">@Model.Recomendacion</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

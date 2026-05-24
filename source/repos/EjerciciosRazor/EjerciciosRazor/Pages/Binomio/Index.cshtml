@@ -1,0 +1,71 @@
+﻿@page
+@model EjerciciosRazor.Pages.Binomio.IndexModel
+@{
+    ViewData["Title"] = "Binomio de Newton";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-2">📐 Binomio de Newton</h2>
+    <p class="text-center text-muted">(ax + by)ⁿ</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Valor de a</label>
+                                <input asp-for="A" class="form-control"
+                                       type="number" step="any" required />
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Valor de b</label>
+                                <input asp-for="B" class="form-control"
+                                       type="number" step="any" required />
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Valor de x</label>
+                                <input asp-for="X" class="form-control"
+                                       type="number" step="any" required />
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Valor de y</label>
+                                <input asp-for="Y" class="form-control"
+                                       type="number" step="any" required />
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Exponente n</label>
+                                <input asp-for="N" class="form-control"
+                                       type="number" min="0" max="20" required />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            Calcular
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Resultado.HasValue)
+        {
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Términos de la expansión:</h5>
+                        <ul class="list-group list-group-flush mb-3">
+                            @foreach (var t in Model.Terminos)
+                            {
+                                <li class="list-group-item small">@t</li>
+                            }
+                        </ul>
+                        <div class="alert alert-success text-center">
+                            <strong>Resultado = @Model.Resultado.Value.ToString("F4")</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

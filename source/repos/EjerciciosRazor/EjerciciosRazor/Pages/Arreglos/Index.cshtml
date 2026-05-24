@@ -1,0 +1,86 @@
+﻿@page
+@model EjerciciosRazor.Pages.Arreglos.IndexModel
+@{
+    ViewData["Title"] = "Arreglos Estadísticos";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">🎲 Arreglos con Estadísticas</h2>
+
+    <div class="text-center mb-3">
+        <a href="/Arreglos" class="btn btn-primary">🔄 Generar nuevo arreglo</a>
+    </div>
+
+    <div class="card shadow mb-3">
+        <div class="card-header bg-dark text-white">Arreglo Aleatorio</div>
+        <div class="card-body">
+            <div class="d-flex flex-wrap gap-2">
+                @foreach (var num in Model.ArregloOriginal)
+                {
+                    <span class="badge bg-secondary fs-6">@num</span>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5>Suma</h5>
+                    <p class="fs-3 text-primary fw-bold">@Model.Suma</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5>Promedio</h5>
+                    <p class="fs-3 text-success fw-bold">@Model.Promedio.ToString("F2")</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5>Mediana</h5>
+                    <p class="fs-6 text-muted">
+                        (@Model.MedianaIzq + @Model.MedianaDer) / 2
+                    </p>
+                    <p class="fs-3 text-warning fw-bold">@Model.Mediana.ToString("F2")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-3">
+        <div class="card-header bg-dark text-white">Arreglo Ordenado</div>
+        <div class="card-body">
+            <div class="d-flex flex-wrap gap-2">
+                @foreach (var num in Model.ArregloOrdenado)
+                {
+                    bool esMediana = num == Model.MedianaIzq || num == Model.MedianaDer;
+                    <span class="badge fs-6 @(esMediana ? "bg-warning text-dark" : "bg-primary")">
+                        @num
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body text-center">
+            <h5>Moda</h5>
+            @if (Model.Moda.Any())
+            {
+                <p class="fs-4 text-danger fw-bold">
+                    @string.Join(", ", Model.Moda)
+                </p>
+            }
+            else
+            {
+                <p class="text-muted">No hay moda (todos los números son únicos)</p>
+            }
+        </div>
+    </div>
+</div>
