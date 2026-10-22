@@ -1,0 +1,103 @@
+body {
+
+  margin: 0;
+
+  font-family: system-ui, sans-serif;
+
+  background: #f4f4f4;
+
+}
+
+ 
+
+.app {
+
+  max-width: 960px;
+
+  margin: 0 auto;
+
+  padding: 1rem;
+
+}
+
+ 
+
+.grid {
+
+  list-style: none;
+
+  padding: 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
+  gap: 1rem;
+
+}
+
+ 
+
+.card {
+
+  background: #fff;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  text-align: center;
+
+}
+
+ 
+
+.card img {
+
+  width: 100%;
+
+  display: block;
+
+}
+
+ 
+
+.card h2 {
+
+  font-size: 1rem;
+
+  margin: 0.5rem 0 0;
+
+}
+
+ 
+
+.card p {
+
+  margin: 0.25rem 0 0.75rem;
+
+  font-size: 0.85rem;
+
+  color: #555;
+
+}
+
+ 
+
+.pagination {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 1rem;
+
+}
+
+ 
+
+ 
+
+
