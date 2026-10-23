@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const API_URL = "https://rickandmortyapi.com/api/character";
 
-export function useCharacters(page) {
+export function useCharacters(page, search) {
     const [characters, setCharacters] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -16,9 +16,17 @@ export function useCharacters(page) {
             setError(null);
 
             try {
-                const response = await fetch(`${API_URL}?page=${page}`, {
+                const response = await fetch(`${API_URL}?page=${page}&name=${search}`, {
                     signal: controller.signal,
                 });
+
+                // Si la API no encuentra resultados, responde con 404
+                if (response.status === 404) {
+                    setCharacters([]);
+                    setTotalPages(1);
+                    setLoading(false);
+                    return;
+                }
 
                 if (!response.ok) {
                     throw new Error(`Error en la petición: ${response.status}`);
@@ -28,7 +36,6 @@ export function useCharacters(page) {
                 setCharacters(data.results);
                 setTotalPages(data.info.pages);
 
-                // --- GUARDAR EN LOCALSTORAGE ---
                 localStorage.setItem(`rickmorty_page_${page}`, JSON.stringify(data.results));
 
             } catch (err) {
@@ -45,7 +52,7 @@ export function useCharacters(page) {
         loadCharacters();
 
         return () => controller.abort();
-    }, [page]);
+    }, [page, search]);
 
     return { characters, totalPages, loading, error };
 }
